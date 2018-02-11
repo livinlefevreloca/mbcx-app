@@ -14,7 +14,7 @@ class TitleBar extends React.Component{
     return(<div id="title-bar">
       <img id="logo"  src='https://github.com/livinlefevreloca/mbcx-app/blob/master/images/Aero-Building-Solutions.png?raw=true' alt="Aero Logo"/>
         <div className="text-container">
-        <h1 >{this.props.title}</h1>
+        <h1 style={{marginTop: -20}}>{this.props.title}</h1>
 
         </div>
 
