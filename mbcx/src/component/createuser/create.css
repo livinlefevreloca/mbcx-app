@@ -1,0 +1,27 @@
+body, html{
+
+ height: 100vh;
+}
+
+
+
+#createuser-box{
+  height: 550px;
+  width: 700px;
+  opacity: 0.9;
+  background-color: #d1d1d1;
+  border: 2px solid #0072BC;
+  border-radius: 10px;
+  margin: 5% auto;
+  font-weight: bold;
+  color: #0072BC;
+}
+
+#form-container{
+  margin: 0 auto;
+  width: 50%;
+  height: 90%;
+  display: block;
+
+
+}

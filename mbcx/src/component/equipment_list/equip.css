@@ -1,0 +1,106 @@
+body,html{
+  min-height: 100%;
+  min-width: 100%;
+  margin: 0;
+}
+
+body{
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/b/bb/Chicago_Lakefront_Night_Skyline.jpg');
+background-position: center center;
+background-size: cover;
+background-repeat: no-repeat;
+
+
+}
+
+#jumbotron{
+  min-height: 350px;
+  width: 70%;
+  height: auto;
+  background-color: #d1d1d1;
+  color: black;
+  font-weight: bold;
+  margin:  0 auto;
+  border: 2px solid black;
+  border-top: none;
+  border-radius: 0px 0px 20px 20px;
+  opacity: 0.75;
+  
+}
+#navbar{
+  height: 27px;
+  width: 70%;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 0;
+  border: 2px solid black;
+  border-bottom: none;
+  background:#0072BC ;
+  opacity: 0.75;
+	border-radius: 10px 10px 0 0;
+}
+.equipment-bar{
+  margin: 0 auto;
+  padding:0;
+  width: 100%;
+  height: 100%;
+ 
+}
+
+ul{
+  list-style-type: none;
+ }
+
+
+.content{
+  font-family: Teko;
+  padding: 5%;
+  font-size: 14px;
+  width: 20%;
+}
+
+.equipment-tab{
+  font-size: 20px;
+}
+
+a {
+  text-decoration: none; 
+  color: black;
+  font-family: Teko;
+}
+
+#equipment-list li{
+  padding: 0;
+  margin: 0;
+}
+
+.content ul{
+  margin: 0 auto;
+  padding: 0;
+}
+
+
+#title-bar{
+  width: 90%;
+  margin: 20px auto;
+  height: 100px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  opacity: 0.5
+  
+}
+
+#logo{
+  width: 150px;
+  height: 75px;
+  position: relative; 
+  top: 10px;
+  left: 10px;
+}
+
+.text-container{
+ 
+  text-align: center;
+  
+}
