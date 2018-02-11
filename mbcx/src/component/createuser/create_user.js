@@ -25,7 +25,7 @@ class Create extends React.Component{
       this.setState({res:"The passwords input do not match. Please try again"})
     }
     var request = 'person='+form.elements[0].value+'&email='+form.elements[1].value+'&address=' + (form.elements[2].value.split(' ').join('+'))+'&pw='+form.elements[3].value;
-    var post = 'http://localhost:3001/createuser';
+    var post = 'https://mbcx-server.herokuapp.com/createuser';
     window.fetch(post, {
       method: 'POST',
       headers: new Headers({

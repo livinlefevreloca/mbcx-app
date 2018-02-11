@@ -36,7 +36,7 @@ class TableContainer extends React.Component{
     //get address associated with user
     let address = localStorage.address;
     //get root url
-    const root = window.location.protocol + '//' + window.location.hostname + ':3001/';
+    const root = 'https://mbcx-server.herokuapp.com/';
     //get equip data from server
     window.fetch(root + 'equipquery?equipment=' + equip + '&address=' + address)
       .then(res => res.json())

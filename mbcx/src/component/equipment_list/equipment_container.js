@@ -22,7 +22,7 @@ class EquipmentContainer extends React.Component{
       //get address associated with username
       var address = localStorage.address;
       //get root url
-      const root = window.location.protocol + '//' + window.location.hostname + ':3001/';
+      const root = 'https://mbcx-server.herokuapp.com/';
       //set up address for url-encoding
       const building = address.split(' ').join('+');
       //building get query

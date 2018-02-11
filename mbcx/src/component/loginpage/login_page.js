@@ -13,7 +13,7 @@ class LoginPage extends React.Component{
   login(e){
     e.preventDefault();
     var form = document.getElementById("login");
-    var post = "http://localhost:3001/auth";
+    var post = "https://mbcx-server.herokuapp.com/auth";
     //url-encoded body for post request
     var request = 'email='+form.elements[0].value + '&pw=' + form.elements[1].value;
     //make post request for login
@@ -67,7 +67,6 @@ class LoginPage extends React.Component{
            <br/>
           <input onClick = {this.login} type="submit"/><br/>
           <br/>
-          //TODO make forgotpassword page
           <a href="#">Forgot password?</a><br/>
           <Link to='/create'>New User</Link>
         </form>
