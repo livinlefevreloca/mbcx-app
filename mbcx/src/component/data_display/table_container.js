@@ -31,25 +31,25 @@ class TableContainer extends React.Component{
 
 
   componentWillMount(){
-    //get data from webserver
-    let url = window.location.href;
-    let urlParts = url.split('/');
-    let equip = urlParts[urlParts.length-1];
-    localStorage.title = equip;
+    //get the current selected piece of equipment
+    let equip = localStorage.current;
+    //get address associated with user
     let address = localStorage.address;
-
-    const root = 'http://localhost:3001/';
-    console.log(root + 'equipquery?equipment=' + equip + '&address=' + address);
+    //get root url
+    const root = window.location.protocol + '//' + window.location.hostname + ':3001/';
+    //get equip data from server
     window.fetch(root + 'equipquery?equipment=' + equip + '&address=' + address)
       .then(res => res.json())
         .then((data) =>{
+          //make array of data in selected column
           var selectedCol = []
-              for(var i  = 1; i < data.length; i ++){
-                selectedCol.push(data[i][this.state.selected])
+          for(var i  = 1; i < data.length; i ++){
+              selectedCol.push(data[i][this.state.selected])
           }
+          //make array of data in date column
           var dateCol = [];
           for(var i  = 1; i < data.length; i ++){
-                dateCol.push(data[i]['DateTimeStamp']);
+              dateCol.push(data[i]['DateTimeStamp']);
           }
           this.setState({retrieved: data, selectedData: selectedCol, dateData: dateCol, isloaded: true} );
 
@@ -61,9 +61,10 @@ class TableContainer extends React.Component{
 
 
    componentDidUpdate(){
+    //checks if app has finished loading before setting up various event listners and functions
     if(this.state.isloaded){
     var that = this;
-    // //used to keep whole app from freezing when trying to render many points
+    //find a range to be used in rendering so the whole table doesnt need to be rendered at once
     function findRange(viewpoint, height){
       var bottom = viewpoint < 10 ?  0: viewpoint-10
       var top = viewpoint + 10 > height? height: viewpoint + 10
@@ -75,19 +76,21 @@ class TableContainer extends React.Component{
     }
       return [bottom, top];
     }
+    //checks if the app has already been updated before
     if(!this.state.isupdated){
+    //function to resize a table on screen change
     function tableResize(){
-    var w = window;
-    var d = document;
-    var t = document.getElementById('title-banner');
-    var e= d.documentElement;
-    var g = d.getElementsByTagName('body')[0];
-    var y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-    var y_1 = t.innerHeight || t.clientHeight;
-    var viewWindowHeight = y - y_1;
-    that.setState({winHeight: viewWindowHeight, isupdated: true})
+      var w = window;
+      var d = document;
+      var t = document.getElementById('title-banner');
+      var e= d.documentElement;
+      var g = d.getElementsByTagName('body')[0];
+      var y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+      var y_1 = t.innerHeight || t.clientHeight;
+      var viewWindowHeight = y - y_1;
+      that.setState({winHeight: viewWindowHeight, isupdated: true})
     }
-
+    // keeps top row at the top while scrolling and the left(date) row stationary while scrolling
     function scrollCorrection() {
       document.getElementsByTagName('thead')[0].style.top = (this.scrollTop+3) +'px';
       var col1 = document.getElementsByClassName('column1');
@@ -102,6 +105,7 @@ class TableContainer extends React.Component{
       }
 
     }
+    //function to request data from the server(form handler)
     function submitQuery(e){
       let form = document.getElementById('dates')
       e.preventDefault();
@@ -111,7 +115,7 @@ class TableContainer extends React.Component{
       that.updateTable(date1, date2);
   }
 
-
+  //event listeners to execute the functions above
   document.getElementById('view-window').addEventListener('scroll', scrollCorrection);
   document.getElementById('query').addEventListener('click', submitQuery);
   window.addEventListener('resize', tableResize);
@@ -119,12 +123,12 @@ class TableContainer extends React.Component{
   }
 }
 }
-
+ //updates table using the date inputs
  updateTable(date1, date2){
-   let equip = localStorage.title;
+   let equip = localStorage.current;
    const root = window.location.protocol + '//' + window.location.hostname + ':3001/';
    let url = root + 'equipquery?equipment=' + equip + '&begin=' + date1 + "&end=" + date2 + '&address=' + localStorage.address;
-   console.log(url);
+   //save the dates to be compared with data returned from the server
    localStorage.begin =  date1;
    localStorage.end = date2
    window.fetch(url)
@@ -145,10 +149,13 @@ class TableContainer extends React.Component{
 
 
  selectColumn(e){
+   //get column name
    var col = e.target.innerHTML;
+   //full retrieved data to be sorted
    var colData = this.state.retrieved;
 
     if(col === "Date Time Stamp"){
+    //if column is the date column sort the forwards than backwards and select this column
     var check = this.state.order;
     colData.sort(function(item1, item2){
       let date1 = new Date(item1['DateTimeStamp'])
@@ -170,6 +177,7 @@ class TableContainer extends React.Component{
      this.setState({retrieved: colData, order: Math.abs(check - 1), selectedData: selectedCol, selected: col});
     }
     else{
+      //select this column
        var selectedCol = []
         for(var i  = 1; i < colData.length; i ++){
           col =col.split(' ').join('')
@@ -186,7 +194,7 @@ class TableContainer extends React.Component{
   render(){
     //sets the height of the table to the window height - the banner height or zero if not yet retrieved
     var winStyle = {height: this.state.winHeight || 0};
-    //calculates the average overall score for the piece og equipment
+    //loading component
     if(!this.state.isloaded){
       return(<h1> Loading...</h1>)
     }

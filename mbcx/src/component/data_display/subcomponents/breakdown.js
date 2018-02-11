@@ -9,19 +9,21 @@ class Breakdown extends React.Component{
     */
 
   render(){
-
+    //find the min, max and average for the data in the selected column to be displayed in the breakdown
     function min_max_av(dates, datas){
       var avr = datas.reduce((cur,acc) => {return cur+acc})/datas.length;
       var min = datas[0];
       var max = datas[0];
       var maxIndex = 0;
       var minIndex = 0
+      //find the min of the column and its index
       for(var i = 0; i < datas.length; i++){
         if(datas[i] < min){
           min = datas[i]
           minIndex = i;
         }
       }
+      //find the max of the column and its index
       for(var i = 0; i < datas.length; i++){
         if(datas[i] > max){
           max = datas[i];
@@ -32,6 +34,7 @@ class Breakdown extends React.Component{
     }
 
    var values = min_max_av(this.props.datetime, this.props.colData)
+   //if the columns only display 1s or 0s
    if((values.min[0] === 0 && values.max[0] === 1) || (values.min[0] === 0 && values.max[0] === 0) || (values.min[0] === 1 && values.max[0] === 1)){
      return(
      <div style={{width: 'auto', paddingRight: 10}} id='col-breakdown'>
@@ -40,6 +43,7 @@ class Breakdown extends React.Component{
           </div>)
 
    }
+   //if the column is 'DateTimeStamp'
    else if(this.props.selected == "DateTimeStamp"){
      var date_min = new Date(values.min[1]);
      var date_max = new Date(values.max[1]);
@@ -51,6 +55,7 @@ class Breakdown extends React.Component{
             </div>)
 
    }
+   //if the columns is anything else
    else{
      var date_min = new Date(values.min[1]);
      var date_max = new Date(values.max[1]);

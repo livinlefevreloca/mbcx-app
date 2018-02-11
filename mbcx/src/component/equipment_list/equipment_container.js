@@ -19,23 +19,29 @@ class EquipmentContainer extends React.Component{
      }
 
     componentWillMount(){
+      //get address associated with username
       var address = localStorage.address;
+      //get root url
       const root = window.location.protocol + '//' + window.location.hostname + ':3001/';
+      //set up address for url-encoding
       const building = address.split(' ').join('+');
+      //building get query
       const query = root + 'buildquery?address=' + building;
+      //get request to server for data start with last 240 entries/ 24 hours in DB
       window.fetch(query)
         .then(res => res.json())
           .then((data) =>{
             var groups = {}
+            //organize retrieved data into lists labeled by theyre type
             for(let i= 0; i < data.length; i++){
-            if (Object.keys(groups).indexOf(data[i].equip_type) == -1){
-              groups[data[i].equip_type] = [data[i].equipment_id,];
+              if (Object.keys(groups).indexOf(data[i].equip_type) == -1){
+                groups[data[i].equip_type] = [data[i].equipment_id,];
             }
             else{
               groups[data[i].equip_type].push(data[i].equipment_id);
             }
             }
-            this.setState({equipment: groups, clicked: Object.keys(groups)[0], building: window.localStorage.address, isloaded: true});
+            this.setState({equipment: groups, clicked: Object.keys(groups)[0], building: localStorage.address, isloaded: true});
             });
 
 

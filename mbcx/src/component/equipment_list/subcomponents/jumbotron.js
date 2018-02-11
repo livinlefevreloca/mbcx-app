@@ -13,7 +13,7 @@ class Jumbotron extends React.Component{
     //map the selected tabs equipment list to a list of li elements to be displayed
     var content = this.props.equipment[this.props.clicked].map((unit) => {
       let link = '/equipment/' + unit;
-      return(<li id={unit}><Link to={link}>{unit}</Link></li>);
+      return(<li onClick={(e)=>{localStorage.current = unit}} id={unit}><Link to={link}>{unit}</Link></li>);
     });
     //retrieves the number of types of equipment
     var linkCount = this.props.equipment[this.props.clicked].length;

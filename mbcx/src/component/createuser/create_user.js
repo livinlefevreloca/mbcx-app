@@ -5,6 +5,12 @@ class Create extends React.Component{
   constructor(props){
     super(props);
 
+    /*constructor:
+            allStates:
+                  res - message being displayed depending on server response
+                  success -  if the user was create succesfully set to true component redirects to login
+    */
+
     this.state = {
       res: '',
       sucess: false

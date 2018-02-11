@@ -12,7 +12,7 @@ props:
 
 */
   render(){
-
+    //remove the 'Z' at the end of the datestring so they can be used as default values
     let date1 = this.props.data[0]["DateTimeStamp"].slice(0,- 1)
     let date2 = this.props.data[this.props.data.length-1]["DateTimeStamp"].slice(0,-1)
     return(

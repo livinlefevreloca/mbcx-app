@@ -14,6 +14,7 @@ props:
 */
 
     if( typeof this.props.data === 'string' ){
+    //for conisitent formating with dates date object is convert into UTC on return
     var cell_data = new Date(this.props.data)
     }
     else{
